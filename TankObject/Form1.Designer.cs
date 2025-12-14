@@ -32,7 +32,7 @@ namespace TankObject
         private void InitializeComponent()
         {
             this.SuspendLayout();
-            // 
+            // test
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);

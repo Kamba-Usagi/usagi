@@ -49,7 +49,7 @@ namespace TankObject
             gameTimer.Interval = 16; // 约60fps
             gameTimer.Tick += GameTimer_Tick;
             gameTimer.Start();
-            // diff
+            // difftest
         }
 
         private void GameTimer_Tick(object sender, EventArgs e) {
