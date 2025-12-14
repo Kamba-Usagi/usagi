@@ -43,13 +43,13 @@ namespace TankObject
             this.FormBorderStyle = FormBorderStyle.FixedSingle;   
             this.MaximizeBox = false;    
             this.DoubleBuffered = true;
+            // test
 
             gameTimer = new Timer();
             gameTimer.Interval = 16; // 约60fps
             gameTimer.Tick += GameTimer_Tick;
             gameTimer.Start();
-                                 
-            
+            // diff
         }
 
         private void GameTimer_Tick(object sender, EventArgs e) {
