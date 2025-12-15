@@ -52,20 +52,20 @@ namespace TankObject
             // difftest
         }
 
-        private void GameTimer_Tick(object sender, EventArgs e) {
+        private void GameTimer_Tick(object sender, EventArgs e) {            
             if (usagi != null)
                 {
-                    // 根据按键状态移动玩家
+                    // 根据按键状态移动玩家，使用if-else避免一帧内多次移动
                     if (isUpPressed) {
                         usagi.Move(Usagi.Direction.Up);
                     }
-                    if (isDownPressed) {
+                    else if (isDownPressed) {
                         usagi.Move(Usagi.Direction.Down);
                     }
-                    if (isLeftPressed) {
+                    else if (isLeftPressed) {
                         usagi.Move(Usagi.Direction.Left);
                     }
-                    if (isRightPressed) {
+                    else if (isRightPressed) {
                         usagi.Move(Usagi.Direction.Right);
                     }
                     usagi.Update();
@@ -117,8 +117,7 @@ namespace TankObject
                         FireBullet();
                         break;                    
                 }
-                // 通知系统重绘界面
-                this.Invalidate();
+                
             }
         }
 

@@ -23,9 +23,9 @@ namespace TankObject
         private const int HeightGrid = 20;
 
         #region 地图式样
-        private static readonly int[,] MapGrid=new int[HeightGrid, WidthGrid]{
+        private static readonly int[,] MapGrid = new int[HeightGrid, WidthGrid]{
                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},//1
-                {0,0,1,1,0,0,1,1,0,0,0,0,1,1,0,0,1,1,0,0},//2
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},//2
                 {0,0,1,1,0,0,1,1,0,0,0,0,1,1,0,0,1,1,0,0},//3
                 {0,0,1,1,0,0,1,1,0,0,0,0,1,1,0,0,1,1,0,0},//4
                 {0,0,1,1,0,0,1,1,0,0,0,0,1,1,0,0,1,1,0,0},//5
@@ -46,28 +46,34 @@ namespace TankObject
                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},//20
          };
 
-         #endregion
+        #endregion
 
-        public static void DrawGame(Graphics g,Usagi usagi) {
-            g.DrawImage(ResourceManager.Instance.GetImage("Background"), 0, 0, GameW,GameH);
-            if (usagi != null){               
+        public static void DrawGame(Graphics g, Usagi usagi)
+        {
+            g.DrawImage(ResourceManager.Instance.GetImage("Background"), 0, 0, GameW, GameH);
+            if (usagi != null)
+            {
                 usagi.Draw(g);
-            }  
+            }
             DrawWall(g);
             DrawInfo(g);
         }
 
-        public static void DrawWall(Graphics g) {
-            for (int y=0;y<HeightGrid;y++) {
-                for (int x = 0; x < WidthGrid;x++) {
+        public static void DrawWall(Graphics g)
+        {
+            for (int y = 0; y < HeightGrid; y++)
+            {
+                for (int x = 0; x < WidthGrid; x++)
+                {
                     int px = x * Grid;
                     int py = y * Grid;
-                    switch (MapGrid[y,x]) {
+                    switch (MapGrid[y, x])
+                    {
                         case 1:
-                            g.DrawImage(ResourceManager.Instance.GetImage("Wall"),px, py,Grid,Grid);
+                            g.DrawImage(ResourceManager.Instance.GetImage("Wall"), px, py, Grid, Grid);
                             break;
                         case 2:
-                            g.DrawImage(ResourceManager.Instance.GetImage("SteelWall"),px, py, Grid, Grid);
+                            g.DrawImage(ResourceManager.Instance.GetImage("SteelWall"), px, py, Grid, Grid);
                             break;
                     }
                 }
@@ -75,11 +81,13 @@ namespace TankObject
 
         }
 
-        public static void DrawInfo(Graphics g) {
-            g.DrawImage(ResourceManager.Instance.GetImage("Info"),1000,0);
+        public static void DrawInfo(Graphics g)
+        {
+            g.DrawImage(ResourceManager.Instance.GetImage("Info"), 1000, 0);
         }
 
-        public static bool IsCollidingWithWall(int x,int y,int width,int height) {//遍历角色占据的区域,判断是否有墙,如无返回false
+        public static bool IsCollidingWithWall(int x, int y, int width, int height)
+        {//遍历角色占据的区域,判断是否有墙,如无返回false
             int leftGrid = x / Grid;
             int topGrid = y / Grid;
             int rightGrid = (x + width - 1) / Grid;
@@ -90,21 +98,26 @@ namespace TankObject
             int safeMargin = width / 2 - 5;
             if (centerX - safeMargin < 0 || centerX + safeMargin > GameW ||
             centerY - safeMargin < 0 || centerY + safeMargin > GameH)
-            return true;
-            for (int gridY = topGrid; gridY <= bottomGrid; gridY++) {
-                for (int gridX = leftGrid; gridX <= rightGrid; gridX++) {
-            
-                if (gridY >= 0 && gridY < HeightGrid && gridX >= 0 && gridX < WidthGrid) {
-             
-                    if (MapGrid[gridY, gridX] == 1 || MapGrid[gridY, gridX] == 2) {
-                        return true;
+                return true;
+            for (int gridY = topGrid; gridY <= bottomGrid; gridY++)
+            {
+                for (int gridX = leftGrid; gridX <= rightGrid; gridX++)
+                {
+
+                    if (gridY >= 0 && gridY < HeightGrid && gridX >= 0 && gridX < WidthGrid)
+                    {
+
+                        if (MapGrid[gridY, gridX] == 1 || MapGrid[gridY, gridX] == 2)
+                        {
+                            return true;
+                        }
                     }
                 }
+            
         }
-    }
-    return false; 
+    return false;
 
-         }
+}
         public static bool HandleBulletCollision(int x, int y, int width, int height)
         {
             int leftGrid = x / Grid;

@@ -53,6 +53,8 @@ namespace TankObject
         public int X { get; set; }
         public int Y { get; set; }
         public int Speed { get; set; }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
         private Dictionary<Direction, Image> directionImages;
 
         public Usagi(int x, int y)
@@ -63,6 +65,9 @@ namespace TankObject
             CurrentDirection = Direction.Down;
             directionImages = new Dictionary<Direction, Image>();
             LoadDirectionImages();
+            Image initialImage = GetCurrentImage();
+            Width = initialImage?.Width ?? 100;
+            Height = initialImage?.Height ?? 100;
         }
 
         
@@ -91,9 +96,8 @@ namespace TankObject
             CurrentDirection = direction;
             int newX = X;
             int newY = Y;
-            Image currentImage = GetCurrentImage();
-            int width = currentImage?.Width ?? 0;
-            int height = currentImage?.Height ?? 0;//获取image值,如果为null,则为0
+            int width = Width;
+            int height = Height;
             switch (direction)
             {
                 case Direction.Up:
