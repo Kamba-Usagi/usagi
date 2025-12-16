@@ -86,6 +86,12 @@ namespace TankObject
             foreach (var gebulin in gebulins)
             {
                 gebulin.Update();
+                // 检查是否需要射击
+                if (gebulin.CanShoot)
+                {
+                    Bullet bullet = gebulin.Shoot();
+                    bullets.Add(bullet);
+                }
             }
             this.Invalidate();
          }
